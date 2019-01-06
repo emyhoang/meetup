@@ -6,6 +6,16 @@ app.use((req, res, next) => {
   return next();
 });
 
+app.get('/throw', (req, res, next) => {
+  throw new Error('Something went wrong');
+});
+
+app.get('/next', (req, res, next) => {
+  setTimeout(() => {
+      next(new Error('Something went wrong'));
+  }, 1000);
+});
+
 app.get('/', (req, res, next) => {
   return res.send('Hello, I am a webserver');
 });
